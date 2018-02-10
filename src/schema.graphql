@@ -1,0 +1,71 @@
+# import Post, State, Individual from "./generated/prisma.graphql"
+
+type Query {
+  feed: [Post!]!
+  drafts: [Post!]!
+  post(id: ID!): Post
+  state: [State!]!
+  individual: [Individual!]!
+}
+
+input IndividualInput{
+  firstname: String!
+  middlename: String!
+  lastname: String!
+  tin: String!
+  gender: String!
+  phone: String!
+  email: String!
+  maritalstatus: String!
+  dateofbirth: String!
+  address: String!
+  street: String!
+  lga: String!
+ 
+  occupation: String!
+  employeestatus: String!
+  employer: String!
+  language: String!
+  marketassociation: String!
+  parkassociation: String!
+}
+
+input StateInput {
+  title: String!
+  code: String!
+}
+
+input CompanyInput {
+  id: ID! @unique
+  cpname: String!
+  cpaddress: String!
+  street: String!
+  email: String!
+  phone: String!
+  bsd: String!
+  jtb_tin: String!
+  cpsize: String!
+  ownertype: String!
+  regno: String!
+  regstatus: String!
+  language: String!
+  category: String!
+}
+
+type Mutation {
+  createCompany(input: CompanyInput!): Company
+  createIndividual(input: IndividualInput!): Individual
+  createDraft(title: String!, text: String): Post
+  createState(title: String!, code: String): State
+  deleteState(title: String!): State
+  deleteIndividual(id: ID!): Individual
+  updateState(title: String!, input: StateInput!) : State
+  updateIndividual(id: ID!, input: IndividualInput!) : Individual
+  deletePost(id: ID!): Post
+  publish(id: ID!): Post
+  deleteCompany(id: ID!): Company
+  updateCompany(id: ID!, input: CompanyInput!) : Company
+}
+
+#   state: String!
+#  nationality: String!
